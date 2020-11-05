@@ -12,8 +12,10 @@ function Books() {
   const [results, setResults] = useState(6);
   const history = useHistory();
 
+  const resultsInit = 6;
+
   useEffect(() => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=book&maxResults=${results}`)
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=book&maxResults=${resultsInit}`)
     .then((response) => {
       setBooks(response.data.items);
     });
