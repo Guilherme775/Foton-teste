@@ -22,6 +22,3 @@ Extras:
   - [axios](https://github.com/axios/axios)
 
 # 💻 Projeto
-
-![BookApp](https://github.com/Guilherme775/Foton-teste/blob/master/src/assets/landing-image.svg)
-Link do desafio: https://github.com/fotonTech/desafio-web-frontend
