@@ -9,8 +9,5 @@ export default styled.button`
   text-decoration: none;
   margin-left: 20px;
   cursor: pointer;
-
-  &:hover {
-      background-color: red;
-  }
+  transition: 0.5s;
 `;

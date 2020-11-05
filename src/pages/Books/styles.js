@@ -66,13 +66,14 @@ export const CardContainer = styled.div`
 
 export const Card = styled.div`
     padding: 20px;
-    margin: 20px auto;
+    margin: 20px 30px;
+
+    @media (min-width: 1920px) {
+        margin: 60px 80px;
+    }
 
     > ul li {
         list-style: none;
-        width: 200px;
-        height: 300px;
-        background-color: #fff;
         border-radius: 8px;
         display: flex;
         flex-direction: column;
@@ -120,6 +121,7 @@ export const ButtonContainer = styled.div`
         align-items: center;
         justify-content: center;
         margin: 40px;
+        color: #fff;
 
         &:hover {
             opacity: 0.9;

@@ -10,7 +10,6 @@ export const Container = styled.div`
 
 export const TextContainer = styled.div`
     width: 50%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +66,6 @@ export const ButtonText = styled.p`
 
 export const ImageContainer = styled.div`
     width: 50%;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;

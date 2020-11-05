@@ -9,15 +9,15 @@ import axios from 'axios';
 function Books() {
   const [query, setQuery] = useState('book');
   const [books, setBooks] = useState([]);
-  const [results, setResults] = useState(6);
+  const [index, setIndex] = useState(10);
+  const [total, setTotal] = useState(0);
   const history = useHistory();
 
-  const resultsInit = 6;
-
   useEffect(() => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=book&maxResults=${resultsInit}`)
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=book&filter=partial&startIndex=0`)
     .then((response) => {
       setBooks(response.data.items);
+      setTotal(response.data.totalItems);
     });
   }, []);
 
@@ -25,9 +25,11 @@ function Books() {
     e.preventDefault();
 
     try {
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${results}`)
+      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=0`)
       .then((response) => {
         setBooks(response.data.items);
+        setTotal(response.data.totalItems);
+        setIndex(10);
       });
     } catch (err) {
       alert('nenhum livro foi encontrado com estes parâmetros')
@@ -35,23 +37,30 @@ function Books() {
   }
 
   function handleMore() {
-    setResults(results + 6);
-
     try {
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${results}`)
-      .then((response) => {
-        setBooks(response.data.items);
-      });
+      const totalIndex = Math.ceil(total / 6);
+
+      if (index > totalIndex ) {
+        alert("máximo de livros encontrados");
+      } else {
+        setIndex(index + 10);
+
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${index}`)
+        .then((response) => {
+          setBooks(response.data.items);
+        });
+      }
     } catch (err) {
       alert('nenhum livro foi encontrado com estes parâmetros')
     }
   }
 
-  function handleSaveItems(title, description, publisher, publishedDate, link) {
+  function handleSaveItems(image, title, description, authors, pageCount, link) {
+    localStorage.setItem("image", image);
     localStorage.setItem("title", title);
     localStorage.setItem("description", description);
-    localStorage.setItem("publisher", publisher);
-    localStorage.setItem("publishedDate", publishedDate);
+    localStorage.setItem("authors", authors);
+    localStorage.setItem("pageCount", pageCount);
     localStorage.setItem("link", link);
 
     history.push('/book');
@@ -76,23 +85,22 @@ function Books() {
           <Card key={item.id}>
             <ul>
               <li onClick={() => {
-                handleSaveItems(item.volumeInfo.title,
+                handleSaveItems(item.volumeInfo.imageLinks.thumbnail,
+                item.volumeInfo.title,
                 item.volumeInfo.description,
-                item.volumeInfo.publisher,
-                item.volumeInfo.publishedDate,
+                item.volumeInfo.authors,
+                item.volumeInfo.pageCount,
                 item.saleInfo.buyLink
                 )
               }}>
-                <h1>{item.volumeInfo.title}</h1>
-                <p>{item.volumeInfo.publisher}</p>
-                <p>{item.volumeInfo.publishedDate}</p>
+                <img src={item.volumeInfo.imageLinks.thumbnail} alt="thumbnail"/>
               </li>
             </ul>
           </Card>
         ))}
       </CardContainer>
       <ButtonContainer>
-        <button onClick={handleMore}>Lead More</button>
+        <button onClick={handleMore}>Ver mais</button>
       </ButtonContainer>
     </Container>
   );

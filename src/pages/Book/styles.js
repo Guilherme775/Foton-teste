@@ -31,12 +31,48 @@ export const ContentContainer = styled.div`
     height: 50vh;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
     background-color: #fffe7a;
     padding: 20px 0;
 
     @media screen and (max-width: 1024px) {
-        height: 70vh;
+        height: 100%;
+    }
+`;
+
+export const ContentBody = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 0;
+
+    @media screen and (max-width: 1024px) {
+        flex-direction: column;
+    }
+`;
+
+export const ContentText = styled.div`
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+`;
+
+export const ContentImage = styled.div`
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > p {
+        margin-top: 20px;
+        font-family: sans-serif;
     }
 `;
 
@@ -92,7 +128,7 @@ export const ButtonsContainer = styled.div`
         width: 150px;
         height: 50px;
         border: 0;
-        background: #34495e;
+        background: #2980b9;
         color: #fff;
         border-radius: 20px;
         cursor: pointer;
@@ -104,7 +140,7 @@ export const ButtonsContainer = styled.div`
         text-decoration: none;
 
         &:hover {
-            background: #2980b9;
+            background: #34495e;
         }
     }
 
