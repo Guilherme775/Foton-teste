@@ -21,11 +21,11 @@ function Books() {
     });
   }, []);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=0`)
+      await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=0`)
       .then((response) => {
         setBooks(response.data.items);
         setTotal(response.data.totalItems);
@@ -36,7 +36,7 @@ function Books() {
     }
   }
 
-  function handleMore() {
+  async function handleMore() {
     try {
       const totalIndex = Math.ceil(total / 6);
 
@@ -45,9 +45,9 @@ function Books() {
       } else {
         setIndex(index + 10);
 
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${index}`)
+        await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${index}`)
         .then((response) => {
-          setBooks(response.data.items);
+          setBooks([...books, ...response.data.items]);
         });
       }
     } catch (err) {
