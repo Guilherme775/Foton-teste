@@ -22,3 +22,5 @@ Extras:
   - [axios](https://github.com/axios/axios)
 
 # 💻 Projeto
+
+![landing-page](https://github.com/Guilherme775/Foton-teste/blob/master/src/assets/landing-page.JPG)

@@ -38,7 +38,7 @@ function Books() {
 
   async function handleMore() {
     try {
-      const totalIndex = Math.ceil(total / 6);
+      const totalIndex = Math.ceil(total / 10);
 
       if (index > totalIndex ) {
         alert("máximo de livros encontrados");
